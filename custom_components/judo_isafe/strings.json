@@ -1,0 +1,165 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "JUDO ZEWA i-SAFE",
+        "description": "Enter the address and credentials of the JUDO connectivity module.",
+        "data": {
+          "host": "Host",
+          "port": "Port",
+          "username": "Username",
+          "password": "Password"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Failed to connect to the connectivity module.",
+      "invalid_auth": "Invalid username or password.",
+      "unsupported_device": "This device is not a ZEWA i-SAFE (device type 0x44).",
+      "unknown": "Unexpected error."
+    },
+    "abort": {
+      "already_configured": "This device is already configured."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Polling",
+        "data": {
+          "live_interval": "Live poll interval (seconds)",
+          "settings_interval": "Settings poll interval (seconds)",
+          "flow_window": "Flow averaging window (seconds)"
+        },
+        "data_description": {
+          "flow_window": "The device reports only a cumulative litre counter, so flow is derived from it. A shorter window reacts faster; a longer one detects smaller flows."
+        }
+      }
+    }
+  },
+  "entity": {
+    "valve": {
+      "leakage_protection": { "name": "Leakage protection" }
+    },
+    "binary_sensor": {
+      "water_flowing": { "name": "Water flowing" },
+      "leakage": { "name": "Leakage" },
+      "flow_limit_exceeded": { "name": "Flow limit exceeded" },
+      "volume_limit_exceeded": { "name": "Volume limit exceeded" },
+      "duration_limit_exceeded": { "name": "Duration limit exceeded" },
+      "microleak_detected": { "name": "Microleak detected" },
+      "no_flow_15_days": { "name": "No water flow for 15 days" },
+      "sleep_mode": { "name": "Sleep mode" },
+      "holiday_mode": { "name": "Holiday mode" },
+      "learn_mode_active": { "name": "Learn mode active" },
+      "special_rule_active": { "name": "Special rule active" },
+      "homing": { "name": "Homing" },
+      "closed_manually": { "name": "Closed manually" },
+      "closed_via_ls_input": { "name": "Closed via LS input" },
+      "sleep_via_ls_input": { "name": "Sleep via LS input" },
+      "microleak_test_impossible": { "name": "Microleak test not possible" },
+      "learn_mode_finished": { "name": "Learn mode finished" },
+      "learn_limits_exceeded": { "name": "Learn mode limits exceeded" }
+    },
+    "sensor": {
+      "total_water": { "name": "Total water" },
+      "water_flow": { "name": "Water flow" },
+      "leak_cause": {
+        "name": "Leak cause",
+        "state": {
+          "none": "None",
+          "flow": "Flow exceeded",
+          "volume": "Volume exceeded",
+          "duration": "Duration exceeded",
+          "microleak": "Microleak",
+          "manual": "Closed manually",
+          "leakage": "Leakage"
+        }
+      },
+      "learn_mode_remaining_water": { "name": "Learn mode remaining water" },
+      "operating_days": { "name": "Operating days" },
+      "device_time": { "name": "Device time" }
+    },
+    "button": {
+      "valve_close": { "name": "Close leakage protection" },
+      "valve_open": { "name": "Open leakage protection" },
+      "sleep_mode_start": { "name": "Start sleep mode" },
+      "sleep_mode_end": { "name": "End sleep mode" },
+      "holiday_mode_start": { "name": "Start holiday mode" },
+      "holiday_mode_end": { "name": "End holiday mode" },
+      "microleak_test": { "name": "Start microleak test" },
+      "learn_mode_start": { "name": "Start learn mode" },
+      "reset_message": { "name": "Reset message" }
+    },
+    "number": {
+      "absence_max_flow": { "name": "Absence max flow" },
+      "absence_max_volume": { "name": "Absence max volume" },
+      "absence_max_duration": { "name": "Absence max duration" },
+      "max_flow": { "name": "Max flow" },
+      "max_volume": { "name": "Max volume" },
+      "max_duration": { "name": "Max duration" },
+      "sleep_duration": { "name": "Sleep duration" }
+    },
+    "select": {
+      "microleak_mode": {
+        "name": "Microleak test mode",
+        "state": {
+          "disabled": "Disabled",
+          "notify": "Notify only",
+          "notify_and_close": "Notify and close"
+        }
+      },
+      "holiday_profile": {
+        "name": "Holiday profile",
+        "state": {
+          "off": "Off",
+          "u1": "U1",
+          "u2": "U2",
+          "u3": "U3"
+        }
+      },
+      "priority": {
+        "name": "Priority",
+        "state": {
+          "holiday": "Holiday mode",
+          "special_rule": "Special rule"
+        }
+      }
+    }
+  },
+  "services": {
+    "set_absence_window": {
+      "name": "Set absence window",
+      "description": "Writes one of the seven absence time windows.",
+      "fields": {
+        "device_id": { "name": "Device", "description": "The i-SAFE device." },
+        "slot": { "name": "Slot", "description": "Absence window slot 0-6." },
+        "start_day": { "name": "Start day", "description": "0 = Sunday, 6 = Saturday." },
+        "start_hour": { "name": "Start hour", "description": "0-23." },
+        "start_minute": { "name": "Start minute", "description": "0-59." },
+        "stop_day": { "name": "Stop day", "description": "0 = Sunday, 6 = Saturday." },
+        "stop_hour": { "name": "Stop hour", "description": "0-23." },
+        "stop_minute": { "name": "Stop minute", "description": "0-59." }
+      }
+    },
+    "clear_absence_window": {
+      "name": "Clear absence window",
+      "description": "Deletes one of the seven absence time windows.",
+      "fields": {
+        "device_id": { "name": "Device", "description": "The i-SAFE device." },
+        "slot": { "name": "Slot", "description": "Absence window slot 0-6." }
+      }
+    },
+    "acknowledge_learn_mode": {
+      "name": "Acknowledge learn mode",
+      "description": "Accepts or discards the limits determined by learn mode.",
+      "fields": {
+        "device_id": { "name": "Device", "description": "The i-SAFE device." },
+        "accept": {
+          "name": "Accept",
+          "description": "Enable to apply the determined limits, disable to discard them."
+        }
+      }
+    }
+  }
+}

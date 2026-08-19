@@ -1,0 +1,83 @@
+set_absence_window:
+  fields:
+    device_id:
+      required: true
+      selector:
+        device:
+          integration: judo_isafe
+    slot:
+      required: true
+      selector:
+        number:
+          min: 0
+          max: 6
+          mode: box
+    start_day:
+      required: true
+      selector:
+        number:
+          min: 0
+          max: 6
+          mode: box
+    start_hour:
+      required: true
+      selector:
+        number:
+          min: 0
+          max: 23
+          mode: box
+    start_minute:
+      required: true
+      selector:
+        number:
+          min: 0
+          max: 59
+          mode: box
+    stop_day:
+      required: true
+      selector:
+        number:
+          min: 0
+          max: 6
+          mode: box
+    stop_hour:
+      required: true
+      selector:
+        number:
+          min: 0
+          max: 23
+          mode: box
+    stop_minute:
+      required: true
+      selector:
+        number:
+          min: 0
+          max: 59
+          mode: box
+
+clear_absence_window:
+  fields:
+    device_id:
+      required: true
+      selector:
+        device:
+          integration: judo_isafe
+    slot:
+      required: true
+      selector:
+        number:
+          min: 0
+          max: 6
+          mode: box
+
+acknowledge_learn_mode:
+  fields:
+    device_id:
+      required: true
+      selector:
+        device:
+          integration: judo_isafe
+    accept:
+      required: true
+      selector:
+        boolean:
